@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Roll Dice Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Roll Dice Game</h1>
+      <div class="d-flex gap-2">
+      <p>Select a number below:</p>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="1" class="btn btn-success">1</button>
+      </form>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="2" class="btn btn-success">2</button>
+      </form>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="3" class="btn btn-success">3</button>
+      </form>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="4" class="btn btn-success">4</button>
+      </form>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="5" class="btn btn-success">5</button>
+      </form>
+      <form action="/roll-dice" method="post">
+        <button name="guess" value="6" class="btn btn-success">6</button>
+      </form>
+      </div>
+      <p>You guessed: <strong th:text="${guess}"></strong></p>
+      <p>The dice rolled: <strong th:text="${random}"></strong></p>
+      <p th:if="${guess == random}">You guessed correctly!</p>
+      <p th:unless="${guess == random}">You guessed incorrectly!</p>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

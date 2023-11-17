@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Join</title>
+</head>
+<body>
+
+<div th:if="${cohort.length() > 5}" >
+  <h1>Welcome to <span th:text="${cohort}"> </span></h1>
+</div>
+
+
+<div>
+  <ul th:each="item : ${studentList}">
+    <li th:text="${item}"></li>
+  </ul>
+</div>
+
+<form action="/join" method="post">
+  <input type="text" name="cohort" id="cohort-ip" class="field" />
+  <button>Join now</button>
+</form>
+
+</body>
+</html>

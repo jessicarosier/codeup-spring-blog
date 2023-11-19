@@ -1,5 +1,12 @@
+package com.codeup.codeupspringblog.models;
+
+import jakarta.persistence.Entity;
+import org.springframework.data.annotation.Id;
+
+
 public class Post {
-//    Create a Post class. This class will ultimately represent a POST record from our database. The class should have private properties and getters and setters for a title and body.
+
+//    Create a com.codeup.codeupspringblog.models.Post class. This class will ultimately represent a POST record from our database. The class should have private properties and getters and setters for a title and body.
 
     private String title;
     private String body;

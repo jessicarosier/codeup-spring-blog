@@ -38,11 +38,11 @@
       <p>The dice rolled: <strong th:text="${random}"></strong></p>
       <p th:if="${guess == random}">You guessed correctly!</p>
       <p th:unless="${guess == random}">You guessed incorrectly!</p>
+      <p >You've guessed correctly <strong th:text="${wins}" ></strong> times
+        !</p>
     </div>
   </div>
 </div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

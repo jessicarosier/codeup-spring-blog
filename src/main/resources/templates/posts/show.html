@@ -7,8 +7,10 @@
 <body>
   <h1>Single Post</h1>
   <div>
-    <span th:text="${post.getTitle()}">Title</span>
-    <span th:text="${post.getBody()}">Body</span>
+    <span th:text="${post.title}"></span>
+    <span th:text="${post.body}"></span>
+<!--    hide th id-->
+    <span th:text="${post.id}"></span>
   </div>
 
 

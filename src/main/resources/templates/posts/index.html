@@ -8,8 +8,11 @@
 <h1>Blog Posts</h1>
 <ul>
   <li th:each="post : ${posts}">
+<!--    //hidden id-->
+    <span th:hidden="true" name="id" th:value="${post.getId()}"></span>
     <span th:text="${post.getTitle()}">Title</span>
     <span th:text="${post.getBody()}">Body</span>
+    <a th:href="@{/posts/{id}(id=${post.getId()})}">View</a>
   </li>
 </ul>
 

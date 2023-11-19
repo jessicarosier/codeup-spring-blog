@@ -1,4 +1,4 @@
-package com.codeup.codeupspringblog.controllers;//package com.codeup.codeupspringblog.models;
+package com.codeup.codeupspringblog.models;//package com.codeup.codeupspringblog.models;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -6,21 +6,25 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
 
-
-
 public class Post {
 
+    private long id;
 
     private String title;
     private String body;
 
-    public Post(String title, String body) {
+    public Post(long id,String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
     }
 
     public Post() {
 
+    }
+
+    public long getId() {
+       return id;
     }
 
     public String getTitle() {
@@ -31,12 +35,16 @@ public class Post {
         return body;
     }
 
-    public String setTitle(String title) {
-        return this.title = title;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String setBody(String body) {
-        return this.body = body;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
 

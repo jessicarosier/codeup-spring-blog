@@ -13,10 +13,10 @@ import java.util.List;
 public class PostController {
 
 
-    @GetMapping("")
+    @GetMapping()
     public String getIndexPage(Model model) {
-        Post post1 = new Post(1, "The greatest Coffee tragedy of all time ", "This morning I was making coffee and I forgot to put the coffee pot under the coffee maker. I made a huge mess.");
-        Post post2 = new Post(2, "Traveling to the moon", "I am going to the moon next week. I am very excited about it.");
+        Post post1 = new Post(1, "Blog Post #1", "This is a blog post.");
+        Post post2 = new Post(2, "Blog Post #2", "This is another blog post");
         List<Post> posts = new ArrayList<>();
         posts.add(post1);
         posts.add(post2);
@@ -28,7 +28,7 @@ public class PostController {
     @GetMapping("/{id}")
     public String getSinglePost(Model model, @PathVariable String id) {
         //method to get post by id
-        Post post = new Post(1, "The greatest Coffee tragedy of all time ", "This morning I was making coffee and I forgot to put the coffee pot under the coffee maker. I made a huge mess.");
+        Post post = new Post(1, "Blog Post #1", "This is a blog post.");
         model.addAttribute("post", post);
         return "posts/show";
 

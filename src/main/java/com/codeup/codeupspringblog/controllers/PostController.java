@@ -1,6 +1,7 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,23 +14,27 @@ import java.util.List;
 public class PostController {
 
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
+    //Above: set up a number of fields for our repositories
+
+
+    //Below: Normal mapping and methods for GET and POST requests
     @GetMapping()
     public String getIndexPage(Model model) {
-        Post post1 = new Post(1, "Blog Post #1", "This is a blog post.");
-        Post post2 = new Post(2, "Blog Post #2", "This is another blog post");
-        List<Post> posts = new ArrayList<>();
-        posts.add(post1);
-        posts.add(post2);
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
     //handles the GET request for one single post
     @GetMapping("/{id}")
-    public String getSinglePost(Model model, @PathVariable String id) {
-        //method to get post by id
-        Post post = new Post(1, "Blog Post #1", "This is a blog post.");
-        model.addAttribute("post", post);
+    public String getSinglePost(Model model, @PathVariable long id) {
+
+        model.addAttribute("post", postDao.getReferenceById(id));
         return "posts/show";
 
     }

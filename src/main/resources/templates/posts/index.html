@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Blog Posts</title>
-</head>
+<head th:replace="partials/partials :: head('Blog Posts')">
 <body>
-<h1>Blog Posts</h1>
+<nav th:replace="partials/partials :: nav"></nav>
+<header th:replace="partials/partials :: header('Blog Posts')"></header>
 <ul>
   <li th:each="post : ${posts}">
 <!--    //hidden id-->
     <span th:hidden="true" name="id" th:value="${post.getId()}"></span>
-    <span th:text="${post.getTitle()}">Title</span>
-    <span th:text="${post.getBody()}">Body</span>
+    <h3 th:text="${post.getTitle()}">Title</h3>
+    <p th:text="${post.getBody()}">Body</p>
     <a th:href="@{/posts/{id}(id=${post.getId()})}">View</a>
   </li>
 </ul>

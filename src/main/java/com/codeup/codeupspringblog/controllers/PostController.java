@@ -13,7 +13,7 @@ import java.util.List;
 public class PostController {
 
 
-    @GetMapping
+    @GetMapping("")
     public String getIndexPage(Model model) {
         Post post1 = new Post(1, "The greatest Coffee tragedy of all time ", "This morning I was making coffee and I forgot to put the coffee pot under the coffee maker. I made a huge mess.");
         Post post2 = new Post(2, "Traveling to the moon", "I am going to the moon next week. I am very excited about it.");
@@ -28,7 +28,7 @@ public class PostController {
     @GetMapping("/{id}")
     public String getSinglePost(Model model, @PathVariable String id) {
         //method to get post by id
-       Post post = new Post(1, "The greatest Coffee tragedy of all time ", "This morning I was making coffee and I forgot to put the coffee pot under the coffee maker. I made a huge mess.");
+        Post post = new Post(1, "The greatest Coffee tragedy of all time ", "This morning I was making coffee and I forgot to put the coffee pot under the coffee maker. I made a huge mess.");
         model.addAttribute("post", post);
         return "posts/show";
 
@@ -44,10 +44,13 @@ public class PostController {
 
 
     //handles the POST request for the form
+// get the post data from the from // use it to create a new post object //then add the post object to the model
+// then return the view for the single post
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-
-    public String createPost() {
-        return "/posts/create";
+    public String createPost(Model model, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post post = new Post(1, title, body);
+        model.addAttribute("post", post);
+        return "/{id}";
     }
 
 }

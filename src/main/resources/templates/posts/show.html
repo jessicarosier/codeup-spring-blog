@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Single Post</title>
-</head>
+<head th:replace="partials/partials :: head('View Post Detials')">
 <body>
-  <h1>Single Post</h1>
+<nav th:replace="partials/partials :: nav"></nav>
+<header th:replace="partials/partials :: header('View Post Details')"></header>
   <div>
-    <span th:text="${post.title}"></span>
-    <span th:text="${post.body}"></span>
+    <h3 th:text="${post.title}"></h3>
+    <p th:text="${post.body}"></p>
 <!--    hide th id-->
     <span th:text="${post.id}"></span>
   </div>

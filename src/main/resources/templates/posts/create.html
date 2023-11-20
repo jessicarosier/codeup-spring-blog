@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Create</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials :: head('Create Post')">
 </head>
 <body>
-<h1>Create</h1>
+<nav th:replace="partials/partials :: nav"></nav>
+<header th:replace="partials/partials :: header('Create Post')"></header>
 <form method="post" action="/posts">
   <input type="text" name="title" placeholder="title">
   <input type="text" name="content" placeholder="content">
   <input type="submit" value="submit">
 </form>
-
+<div>
+</div>
+<th:block th:replace="partials/partials :: scripts"></th:block>
 </body>
 </html>

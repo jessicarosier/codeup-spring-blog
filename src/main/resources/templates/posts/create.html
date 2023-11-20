@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head('Create Post')">
+<head th:replace="fragments/fragments :: head('Create Post')">
 </head>
 <body>
-<nav th:replace="partials/partials :: nav"></nav>
-<header th:replace="partials/partials :: header('Create Post')"></header>
+<nav th:replace="fragments/fragments :: nav"></nav>
+<header th:replace="fragments/fragments :: header('Create Post')"></header>
 <form method="post" action="/posts">
   <input type="text" name="title" placeholder="title">
   <input type="text" name="content" placeholder="content">
@@ -12,6 +12,6 @@
 </form>
 <div>
 </div>
-<th:block th:replace="partials/partials :: scripts"></th:block>
+<th:block th:replace="fragments/fragments :: scripts"></th:block>
 </body>
 </html>

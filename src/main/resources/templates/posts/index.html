@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head('Blog Posts')">
+<head th:replace="fragments/fragments :: head('Blog Posts')">
 <body>
-<nav th:replace="partials/partials :: nav"></nav>
-<header th:replace="partials/partials :: header('Blog Posts')"></header>
+<nav th:replace="fragments/fragments :: nav"></nav>
+<header th:replace="fragments/fragments :: header('Blog Posts')"></header>
 <ul>
   <li th:each="post : ${posts}">
 <!--    //hidden id-->
-    <span th:hidden="true" name="id" th:value="${post.getId()}"></span>
     <h3 th:text="${post.getTitle()}">Title</h3>
     <p th:text="${post.getBody()}">Body</p>
     <a th:href="@{/posts/{id}(id=${post.getId()})}">View</a>

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragments :: head('Create Post')">
+<head th:replace="partials/fragments :: head('Create Post')">
+  <link href="/css/create.css" rel="stylesheet">
 </head>
 <body>
-<nav th:replace="fragments/fragments :: nav"></nav>
-<header th:replace="fragments/fragments :: header('Create Post')"></header>
-<form method="post" action="/posts">
+<nav th:replace="partials/fragments :: nav"></nav>
+<header th:replace="partials/fragments :: header('Create Post')"></header>
+<form method="post" action="/posts/create">
   <input type="text" name="title" placeholder="title">
-  <input type="text" name="content" placeholder="content">
-  <input type="submit" value="submit">
+  <input type="text" name="body" placeholder="content">
+  <button type="submit">Submit</button>
 </form>
 <div>
 </div>
-<th:block th:replace="fragments/fragments :: scripts"></th:block>
+<th:block th:replace="partials/fragments :: scripts"></th:block>
 </body>
 </html>

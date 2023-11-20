@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
@@ -34,7 +32,7 @@ public class PostController {
     @GetMapping("/{id}")
     public String getSinglePost(Model model, @PathVariable long id) {
 
-        model.addAttribute("post", postDao.getReferenceById(id));
+        model.addAttribute("post", postDao.getPostById(id));
         return "posts/show";
 
     }
@@ -48,14 +46,18 @@ public class PostController {
     }
 
 
-    //handles the POST request for the form
-// get the post data from the from // use it to create a new post object //then add the post object to the model
-// then return the view for the single post
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPost(Model model, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-        Post post = new Post(1, title, body);
-        model.addAttribute("post", post);
-        return "/{id}";
+        Post post = new Post(title, body);
+        model.addAttribute("post", postDao.save(post));
+
+        return "redirect:/posts";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deletePost(Model model, @RequestParam(name="id") long id) {
+        postDao.deleteById(id);
+        return "redirect:/posts";
     }
 
 }

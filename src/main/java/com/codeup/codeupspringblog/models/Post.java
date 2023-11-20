@@ -1,6 +1,7 @@
 package com.codeup.codeupspringblog.models;//package com.codeup.codeupspringblog.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
@@ -19,6 +20,11 @@ public class Post {
 
     @Column(name="body", length = 250)
     private String body;
+
+//    @ManyToOne
+//    @JoinColumn(name="user_id")
+//    @Cascade({})
+//    private User user;
 
     public Post(long id,String title, String body) {
         this.id = id;

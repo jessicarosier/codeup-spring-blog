@@ -8,6 +8,10 @@
   <h3 th:text="${post.title}"></h3>
   <p th:text="${post.body}"></p>
   <a th:href="@{/posts}"}>Go Back</a>
+  <form method="post" action="/posts/delete">
+  <input th:hidden="true" name="id" th:value="${post.getId()}" >
+    <button type="submit">Delete Post</button>
+  </form>
 </div>
 
 

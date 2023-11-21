@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/fragments :: head('View Post Detials')">
+<head th:replace="partials/fragments :: head('Blog Posts', '/css/show.css')">
 <body>
 <nav th:replace="partials/fragments :: nav"></nav>
 <header th:replace="partials/fragments :: header('View Post Details')"></header>
-<div>
-  <h3 th:text="${post.title}"></h3>
-  <p th:text="${post.body}"></p>
-  <a th:href="@{/posts}"}>Go Back</a>
-  <form method="post" action="/posts/delete">
-  <input th:hidden="true" name="id" th:value="${post.getId()}" >
-    <button type="submit">Delete Post</button>
-  </form>
-</div>
-
-
+<main>
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex flex-column align-items-center">
+          <div class="single-post-wrapper">
+            <h3 th:text="${post.getTitle()}"></h3>
+            <p th:text="${post.getBody()}"></p>
+            <a th:href="@{/posts}" }>Go Back</a>
+            <form method="post" action="/posts/delete">
+              <input th:hidden="true" name="id" th:value="${post.getId()}">
+              <button class="delete-button" type="submit">Delete Post</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 </body>
 </html>

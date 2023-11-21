@@ -22,31 +22,16 @@
     height: 100dvh;
 }
 
-.single-post-wrapper {
+.post-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    border: 1px solid black;
-    border-radius: 4px;
-    padding: 50px 0;
-    min-height: fit-content;
-    min-width: 50dvw;
     align-items: center;
-}
+    border: 1px solid var(--cool-green);
+    border-radius: 4px;
+    padding: 15px;
+    width: 400px;
 
-.delete-button {
-    border: none;
-    background-color: #649671;
-    color: white;
-    border-radius: 50px;
-    min-width: 300px;
-    padding: 10px;
-    margin-top: 10px;
-    align-self: center;
-
-    &:hover {
-        color: black;
-        background-color: #C9D57B;
-        border: 1px solid black;
+    & p {
+        text-wrap: normal;
     }
 }

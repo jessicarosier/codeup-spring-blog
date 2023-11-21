@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/posts")
 public class PostController {
 
-
+    // DEPENDENCY INJECTION
     private final PostRepository postDao;
 
+    // INSTANTIATES A NEW POST REPOSITORY WHICH IS USED TO ACCESS THE DATABASE
     public PostController(PostRepository postDao) {
         this.postDao = postDao;
     }
 
-    //Above: set up a number of fields for our repositories
 
 
-    //Below: Normal mapping and methods for GET and POST requests
+    //  GET ALL POSTS
     @GetMapping()
     public String getIndexPage(Model model) {
         model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
-    //handles the GET request for one single post
+    // GET SINGLE POST
     @GetMapping("/{id}")
     public String getSinglePost(Model model, @PathVariable long id) {
 
@@ -37,8 +37,8 @@ public class PostController {
 
     }
 
+    // CREATE POSTS
 
-    //handles the GET request for the form
     @GetMapping("/create")
     public String getCreatePostForm() {
 
@@ -54,10 +54,30 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    //    DELETE POSTS
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deletePost(Model model, @RequestParam(name="id") long id) {
+    public String deletePost(Model model, @RequestParam(name = "id") long id) {
         postDao.deleteById(id);
         return "redirect:/posts";
     }
+
+
+    //    EDIT POSTS
+
+    @GetMapping("/edit/{id}")
+    public String getEditPostForm(Model model, @PathVariable long id) {
+        model.addAttribute("post", postDao.getPostById(id));
+        return "posts/edit";
+    }
+
+
+    @PostMapping("/edit")
+    public String editPost(Model model, @RequestParam(name = "id") long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post post = new Post(id, title, body);
+        model.addAttribute("post", postDao.save(post));
+        return "redirect:/posts";
+    }
+
+
 
 }

@@ -38,20 +38,19 @@ body {
         min-width: 50dvw;
         min-height: 50dvh;
         gap: 5px;
-        border-radius: 6px;
+        border-radius: 15px;
         padding: 75px;
+        box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
 
         & input {
             padding: 10px;
             border-radius: 4px;
-            font-family: var(--content-font);
         }
 
         & textarea {
             padding: 10px;
             min-height: 300px;
             border-radius: 4px;
-            font-family: var(--content-font);
         }
 
         & .submit-button {

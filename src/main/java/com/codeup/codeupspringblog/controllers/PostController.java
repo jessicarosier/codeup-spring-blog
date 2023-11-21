@@ -1,7 +1,9 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +16,12 @@ public class PostController {
     // DEPENDENCY INJECTION
     private final PostRepository postDao;
 
-    // INSTANTIATES A NEW POST REPOSITORY WHICH IS USED TO ACCESS THE DATABASE
-    public PostController(PostRepository postDao) {
+    private final UserRepository userDao;
+
+    // INSTANTIATES NEW REPOSITORIES WHICH ARE USED TO ACCESS THE DATABASE
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
 
@@ -46,16 +51,17 @@ public class PostController {
     }
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping("/create")
     public String createPost(Model model, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        User user = userDao.getUserById(1L);
         Post post = new Post(title, body);
-        model.addAttribute("post", postDao.save(post));
-
+        post.setUser(user);
+        postDao.save(post);
         return "redirect:/posts";
     }
 
     //    DELETE POSTS
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @PostMapping( "/delete")
     public String deletePost(Model model, @RequestParam(name = "id") long id) {
         postDao.deleteById(id);
         return "redirect:/posts";

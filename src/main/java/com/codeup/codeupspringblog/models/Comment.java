@@ -1,24 +1,71 @@
 package com.codeup.codeupspringblog.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "comments")
 public class Comment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     long id;
 
-    long post_id;
-
-    long user_id;
-
+    @Column(name = "body", length = 500)
     String body;
 
-    public Comment(long id, long post_id, long user_id, String body) {
+    // MANY COMMENTS CAN BELONG TO ONE USER
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    // MANY COMMENTS CAN BELONG TO ONE POST
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+
+    public Comment(long id, String body, User user, Post post) {
         this.id = id;
-        this.post_id = post_id;
-        this.user_id = user_id;
+        this.body = body;
+        this.user = user;
+        this.post = post;
+    }
+
+    public Comment(long id, String body, User user) {
+        this.id = id;
+        this.body = body;
+        this.user = user;
+    }
+
+    public Comment(long id, String body) {
+        this.id = id;
+        this.body = body;
+    }
+
+    public Comment(String body) {
         this.body = body;
     }
 
     public Comment() {
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public long getId() {
@@ -29,21 +76,6 @@ public class Comment {
         this.id = id;
     }
 
-    public long getPost_id() {
-        return post_id;
-    }
-
-    public void setPost_id(long post_id) {
-        this.post_id = post_id;
-    }
-
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
-    }
 
     public String getBody() {
         return body;

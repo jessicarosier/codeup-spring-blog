@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{partials/fragments :: head('Reister', '/css/create_user.css')}"></head>
+<head th:replace="~{partials/fragments :: head('Reister', '/css/register.css')}"></head>
 <body>
 <nav th:replace="~{partials/fragments :: nav}"></nav>
 <header th:replace="~{partials/fragments :: header('Register')}"></header>
@@ -9,9 +9,10 @@
   <div class="page-wrapper">
     <div class="container">
       <div class="row">
-        <div class="col d-flex justify-content-center form-wrapper w-100">
-          <form th:action="@{/user/sign-up}" th:object="${user}" th:method="post">
-            <div class="form-group">
+        <div class="col d-flex flex-column justify-content-center form-wrapper w-100">
+          <form action="/user/sign-up" th:object="${user}" th:method="post" class="d-flex flex-column"
+                id="register-form">
+            <div class="form-group d-flex flex-column gap-2">
               <label for="username">Username
                 <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
                        placeholder="Enter username">
@@ -32,16 +33,20 @@
                 <input type="password" th:field="*{password}" name="password" class="form-control" id="password"
                        placeholder="Enter Password">
               </label>
+              <label for="password-confirm">Confirm Password
+                <input type="password" name="password-confirm" class="form-control" id="password-confirm"
+                       placeholder="Enter Password">
+              </label>
+              <p id="password-error"></p>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
           </form>
-
+          <button id="register-button" type="submit" class="btn btn-primary">Register</button>
 
         </div>
       </div>
     </div>
   </div>
 </main>
-<th:block th:replace="~{partials/fragments :: scripts('/js/create.js')}"></th:block>
+<th:block th:replace="~{partials/fragments :: scripts('/js/register.js')}"></th:block>
 </body>
 </html>

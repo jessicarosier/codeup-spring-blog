@@ -5,6 +5,8 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+import java.util.List;
+
 //@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
 @Entity
@@ -12,7 +14,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private long id;
 
     @Column(name = "title", nullable = false, length = 250)
@@ -21,10 +23,30 @@ public class Post {
     @Column(name = "body", length = 250)
     private String body;
 
+    // MANY POSTS CAN BELONG TO ONE USER
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name="user_id")
     private User user;
 
+    // ONE POST CAN HAVE MANY COMMENTS
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments;
+
+
+    public Post(long id, String title, String body, User user, List<Comment> comments) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.comments = comments;
+    }
+
+    public Post(long id, String title, String body, User user) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
 
     public Post(long id, String title, String body) {
         this.id = id;
@@ -41,6 +63,21 @@ public class Post {
 
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public long getId() {
         return id;

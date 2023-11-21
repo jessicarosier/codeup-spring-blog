@@ -3,6 +3,7 @@ package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +24,14 @@ public class UserController {
     public String getCreateUserForm(Model model) {
         model.addAttribute("user", new User());
 
-        return "users/create";
+        return "users/register";
     }
 
     @PostMapping("/sign-up")
     public String createUser(@ModelAttribute User user) {
 
-//        if(password.equals(passwordConfirm)){
-//            user.setPassword(password);
-//        }
+        String hashedPsswd = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        user.setPassword(hashedPsswd);
 
         userDao.save(user);
         return "redirect:/posts";

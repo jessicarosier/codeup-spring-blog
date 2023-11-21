@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/fragments :: head('Blog Posts', '/css/create_edit.css')">
+<head th:replace="~{partials/fragments :: head('Edit Post', '/css/create_edit.css')}"></head>
 <body>
-<nav th:replace="partials/fragments :: nav"></nav>
-<header th:replace="partials/fragments :: header('Edit Post')"></header>
+<nav th:replace="~{partials/fragments :: nav}"></nav>
+<header th:replace="~{partials/fragments :: header('Edit Post')}"></header>
 <main>
   <div class="page-wrapper">
     <div class="container">
@@ -20,5 +20,6 @@
     </div>
   </div>
 </main>
+<th:block th:replace="~{partials/fragments :: scripts('/js/main.js')}"></th:block>
 </body>
 </html>

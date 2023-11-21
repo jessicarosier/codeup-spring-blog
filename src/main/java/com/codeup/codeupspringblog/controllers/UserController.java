@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     // DEPENDENCY INJECTION
@@ -19,22 +19,21 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/create")
-    public String getCreateUserForm() {
+    @GetMapping("/sign-up")
+    public String getCreateUserForm(Model model) {
+        model.addAttribute("user", new User());
 
         return "users/create";
     }
 
-    @PostMapping("/create")
-    public String createUser(@ModelAttribute User user, Model model, @RequestParam(name="password") String password ,@RequestParam(name = "password_confirm") String passwordConfirm) {
+    @PostMapping("/sign-up")
+    public String createUser(@ModelAttribute User user) {
 
-        if (!password.equals(passwordConfirm)) {
-            model.addAttribute("passwordError", "Passwords do not match");
-            return "users/create";
-        }
+//        if(password.equals(passwordConfirm)){
+//            user.setPassword(password);
+//        }
 
-        user.setPassword(password);
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:/posts";
     }
 }

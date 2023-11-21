@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
+<head th:replace="partials/fragments :: head('Login', '/css/create_user.css')">
 <body>
+<nav th:replace="partials/fragments :: nav"></nav>
+<header th:replace="partials/fragments :: header('Login')"></header>
 
+<form>
+  <label>
+    <input th:name >
+  </label>
+</form>
+
+
+
+
+
+<th:block th:replace="partials/fragments :: scripts('/js/main.js')"></th:block>
 </body>
 </html>

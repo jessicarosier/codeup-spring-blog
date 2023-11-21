@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/fragments :: head('Reister', '/css/create_user.css')">
-</head>
+
+<head th:replace="~{partials/fragments :: head('Reister', '/css/create_user.css')}"></head>
 <body>
-<nav th:replace="partials/fragments :: nav"></nav>
-<header th:replace="partials/fragments :: header('Register')"></header>
+<nav th:replace="~{partials/fragments :: nav}"></nav>
+<header th:replace="~{partials/fragments :: header('Register')}"></header>
 <main>
   <div class="page-wrapper">
     <div class="container">
       <div class="row">
         <div class="col d-flex justify-content-center form-wrapper w-100">
-          <form th:action="@{/create}" th:object="${user}" method="post">
+          <form th:action="@{/user/sign-up}" th:object="${user}" th:method="post">
             <div class="form-group">
               <label for="username">Username
-                <input type="text" th:field="username" name="username" class="form-control" id="username"
+                <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
                        placeholder="Enter username">
               </label>
               <label for="firstname">First Name
-                <input type="text" th:field="firstName" name="firstname" class="form-control" id="firstname"
+                <input type="text" th:field="*{firstName}" name="firstname" class="form-control" id="firstname"
                        placeholder="Your First Name">
               </label>
               <label for="lastname">Last Name
-                <input type="text" th:field="lastName" name="lastname" class="form-control" id="lastname"
+                <input type="text" th:field="*{lastName}" name="lastname" class="form-control" id="lastname"
                        placeholder="Your Last Name">
               </label>
               <label for="email">Email
-                <input type="text" th:field="email" name="email" class="form-control" id="email"
+                <input type="text" th:field="*{email}" name="email" class="form-control" id="email"
                        placeholder="Your email">
               </label>
               <label for="password">Password
-                <input type="text" name="password" class="form-control" id="password"
+                <input type="password" th:field="*{password}" name="password" class="form-control" id="password"
                        placeholder="Enter Password">
-              </label>
-              <label for="password-confirm">Confirm Password
-                <input type="text" name="password-confirm" class="form-control" id="password-confirm"
-                       placeholder="Re-Enter Password">
               </label>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
@@ -46,6 +42,6 @@
     </div>
   </div>
 </main>
-<th:block th:replace="partials/fragments :: scripts('/js/create.js')"></th:block>
+<th:block th:replace="~{partials/fragments :: scripts('/js/create.js')}"></th:block>
 </body>
 </html>

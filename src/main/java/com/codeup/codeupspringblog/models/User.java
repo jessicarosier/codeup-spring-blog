@@ -14,47 +14,51 @@ public class User {
     @Column(nullable = false)
     long id;
 
-    @Column(name="username", length = 250)
-    String username;
 
-    @Column(name="first_name", length = 250)
-    String firstName;
+    @Column(name = "username", length = 250, unique = true)
+    private String username;
 
-    @Column(name="last_name", length = 250)
-    String lastName;
+    @Column(name = "first_name", length = 250)
+    private String firstName;
 
-    @Column(name="email", length = 250)
-    String email;
+    @Column(name = "last_name", length = 250)
+    private String lastName;
 
-    @Column(name="password", length = 500)
-    String password;
+    @Column(name = "email", length = 250, unique = true)
+    private String email;
+
+    @Column(name = "password", length = 500)
+    private String password;
+
+    @Column(name = "avatar", length = 500)
+    private String avatar;
+
+
 
     // ONE USER CAN HAVE MANY POSTS
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
 
     // ONE USER CAN HAVE MANY COMMENTS
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> comments;
 
 
-    @Entity
-    @Table(name = "users")
-    public class User {
-        /* ... */
+    public User() {
 
-        public User(User copy) {
-            id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-            email = copy.email;
-            username = copy.username;
-            password = copy.password;
-        }
     }
 
-
-
-    public User() {
+    public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.posts = posts;
+        this.comments = comments;
     }
 
     public User(long id, String username, String firstName, String lastName, String email, String password, List<Post> posts, List<Comment> comments) {
@@ -85,6 +89,26 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.posts = posts;
+        this.comments = comments;
+    }
+
+    public User(String username, String firstName, String lastName, String email, String password, String avatar) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
     }
 
     public User(String username, String firstName, String lastName, String email, String password) {
@@ -165,5 +189,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

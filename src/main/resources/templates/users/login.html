@@ -5,15 +5,18 @@
 <nav th:replace="partials/fragments :: nav"></nav>
 <header th:replace="partials/fragments :: header('Login')"></header>
 
-<form>
-  <label> Username
-    <input th:name="username"
-  </label>
+<form action="/user/login" th:object="${user}" th:method="post">
+  <div class="form-group d-flex flex-column gap-2">
+    <label for="username">Username
+      <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
+             placeholder="Enter Username">
+    </label>
+    <label for="password">Password
+      <input type="password" th:field="*{password}" name="password" class="form-control" id="password"
+             placeholder="Enter Password">
+    </label>
+  </div>
 </form>
-
-
-
-
 
 <th:block th:replace="partials/fragments :: scripts('/js/main.js')"></th:block>
 </body>

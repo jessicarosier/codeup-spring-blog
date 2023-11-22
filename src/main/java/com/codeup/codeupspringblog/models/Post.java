@@ -23,6 +23,9 @@ public class Post {
     @Column(name = "body", length = 250)
     private String body;
 
+    @Column(name="image", length = 500)
+    private String image;
+
     // MANY POSTS CAN BELONG TO ONE USER
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -32,6 +35,15 @@ public class Post {
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
+
+    public Post(long id, String title, String body, String image, User user, List<Comment> comments) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+        this.comments = comments;
+    }
 
     public Post(long id, String title, String body, User user, List<Comment> comments) {
         this.id = id;
@@ -52,6 +64,27 @@ public class Post {
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, String image) {
+        this.title = title;
+        this.body = body;
+        this.image = image;
+    }
+
+    public Post(String title, String body, String image, User user) {
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+    }
+
+    public Post(String title, String body, String image, User user, List<Comment> comments) {
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+        this.comments = comments;
     }
 
     public Post(String title, String body) {
@@ -103,5 +136,11 @@ public class Post {
         this.body = body;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

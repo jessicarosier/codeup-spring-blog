@@ -9,10 +9,12 @@
     <div class="container">
       <div class="row">
         <div class="col d-flex flex-column align-items-center form-wrapper w-100">
-          <form action="/posts/edit" method="post" class="d-flex flex-column justify-content-center">
-            <input type="text" th:value="${post.getTitle()}" th:name="title" />
-            <textarea type="text" name="body" th:text="${post.getBody()}"></textarea>
-            <input th:hidden="true" th:value="${post.getId()}" th:name="id" />
+          <form action="/posts/edit" th:method="post" th:object="${post}"
+                class="d-flex flex-column justify-content-center">
+            <input type="text" th:field="*{title}" th:value="${post.getTitle()}" th:name="title" />
+            <textarea type="text" th:field="*{body}" name="body" th:text="${post.getBody()}"></textarea>
+            <input th:hidden="true" th:field="*{id}" th:value="${post.getId()}" th:name="id" />
+            <input th:hidden="true" th:field="*{user}" th:value="${post.getUser()}" th:name="id" />
             <button class="submit-button" type="submit">Submit</button>
           </form>
         </div>

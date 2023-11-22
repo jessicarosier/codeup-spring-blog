@@ -34,6 +34,13 @@ public class UserController {
         user.setPassword(hashedPsswd);
 
         userDao.save(user);
-        return "redirect:/posts";
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("/login")
+    public String userLogin(Model model) {
+        model.addAttribute("user", new User());
+
+        return "users/login";
     }
 }

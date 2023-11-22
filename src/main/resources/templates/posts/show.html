@@ -12,6 +12,7 @@
           <div class="single-post-wrapper">
             <h3 th:text="${post.getTitle()}"></h3>
             <p th:text="${post.getBody()}"></p>
+            <p>By: <span th:text="${post.getUser().getEmail()}"></span></p>
             <a th:href="@{/posts}" }>Go Back</a>
             <form method="post" action="/posts/delete">
               <input th:hidden="true" name="id" th:value="${post.getId()}">

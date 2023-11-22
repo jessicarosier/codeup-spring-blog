@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/posts")
@@ -83,6 +86,55 @@ public class PostController {
     public String editPost(@ModelAttribute Post post) {
         postDao.save(post);
         return "redirect:/posts";
+    }
+
+    /* LIKE POSTS / when form is submitted, it will send the
+     id of the post to this mapping so we can add the user to
+      the likedBy set */
+    @PostMapping("/like")
+    public String likePost(@RequestParam(name = "id") long id) {
+        Post post = postDao.getPostById(id);
+      // TODO: Refactor - get the user that is logged in
+        User user = userDao.getUserById(1L);
+        post.getLikedBy().add(user);
+        postDao.save(post);
+        return "redirect:/posts/" + id;
+    }
+
+    /* UNLIKE POSTS / when form is submitted, it will send the
+     id of the post to this mapping so we can remove the user from
+      the likedBy set */
+    @PostMapping("/unlike")
+    public String unlikePost(@RequestParam(name = "id") long id) {
+        Post post = postDao.getPostById(id);
+        // TODO: Refactor - get the user that is logged in
+        User user = userDao.getUserById(1L);
+        post.getLikedBy().remove(user);
+        postDao.save(post);
+        return "redirect:/posts/" + id;
+    }
+
+    /* GET LIST OF USERS THAT LIKED A POST AND GIVE IT TO THE FRONTEND*/
+
+    @GetMapping("/posts.json")
+    public @ResponseBody List<Post> viewAllPostsInJSONFormat() {
+        return postDao.findAll();
+    }
+
+    @GetMapping("/posts.json/{id}")
+    public @ResponseBody List<Post> viewAllPostsInJSONFormat(@PathVariable long id) {
+        return postDao.findAllById(Collections.singleton(id));
+    }
+
+    @GetMapping("/posts/ajax")
+    public String viewAllPostsInAJAXFormat() {
+        return "posts/ajax";
+    }
+
+
+    @GetMapping("/posts/ajax/{id}.json")
+    public @ResponseBody Post viewSinglePostInJSONFormat(@PathVariable long id) {
+        return postDao.getPostById(id);
     }
 
 

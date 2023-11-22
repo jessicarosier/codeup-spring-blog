@@ -7,21 +7,36 @@ const passwordError = document.getElementById("password-error");
 const registerForm = document.getElementById("register-form");
 
 
+//
+// //WHEN A NEW USER REGISTERS, CREATE A NEW MAP FOR THEM
+// mapboxgl.accessToken = `${MAP_BOX_KEY}`;
+// const map = new mapboxgl.Map({
+//     container: 'map', // container ID
+//     style: 'mapbox://styles/mapbox/streets-v12', // style URL
+//     center: [-74.5, 40], // starting position [lng, lat]
+//     zoom: 9 // starting zoom
+// });
+//
+// // Example: Capture map information on user interaction
+// map.on('moveend', function() {
+//     let center = map.getCenter();
+//     let zoom = map.getZoom();
+//
+//     fetch('/save-map', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             latitude: center.lat,
+//             longitude: center.lng,
+//             zoomLevel: zoom
+//         })
+//     }).then(r => );
+//
+// });
 
-//WHEN A NEW USER REGISTERS, CREATE A NEW MAP FOR THEM
-mapboxgl.accessToken = `${MAP_BOX_KEY}`;
-const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 9 // starting zoom
-});
-console.log(typeof map);
-console.log(map);
-console.log(map.container);
-console.log(map.style);
-console.log(map.center);
-console.log(map.zoom);
+
 
 
 registerButton.addEventListener("click", (e)=> {

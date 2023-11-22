@@ -1,11 +1,14 @@
 package com.codeup.codeupspringblog.models;//package com.codeup.codeupspringblog.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
@@ -23,18 +26,37 @@ public class Post {
     @Column(name = "body", length = 250)
     private String body;
 
-    @Column(name="image", length = 500)
+    @Column(name = "image", length = 500)
     private String image;
 
     // MANY POSTS CAN BELONG TO ONE USER
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JsonManagedReference
+    @JoinColumn(name = "user_id")
     private User user;
 
     // ONE POST CAN HAVE MANY COMMENTS
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "post_likes",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> likedBy = new HashSet<>();
+
+
+    public Post(long id, String title, String body, String image, User user, List<Comment> comments, Set<User> likedBy) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+        this.comments = comments;
+        this.likedBy = likedBy;
+    }
 
     public Post(long id, String title, String body, String image, User user, List<Comment> comments) {
         this.id = id;
@@ -142,5 +164,13 @@ public class Post {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<User> getLikedBy() {
+        return likedBy;
+    }
+
+    public void setLikedBy(Set<User> likedBy) {
+        this.likedBy = likedBy;
     }
 }

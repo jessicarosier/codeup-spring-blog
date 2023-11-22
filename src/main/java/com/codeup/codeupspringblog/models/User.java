@@ -1,9 +1,13 @@
 package com.codeup.codeupspringblog.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +32,7 @@ public class User {
     private String email;
 
     @Column(name = "password", length = 500)
+    @JsonIgnore
     private String password;
 
     @Column(name = "avatar", length = 500)
@@ -37,6 +42,7 @@ public class User {
 
     // ONE USER CAN HAVE MANY POSTS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Post> posts;
 
 
@@ -44,9 +50,30 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> comments;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "map_id", referencedColumnName = "id")
+    private Map map;
+
+
+    @ManyToMany(mappedBy = "likedBy")
+    private Set<Post> likedPosts = new HashSet<>();
 
     public User() {
 
+    }
+
+    public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments, Map map, Set<Post> likedPosts) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.posts = posts;
+        this.comments = comments;
+        this.map = map;
+        this.likedPosts = likedPosts;
     }
 
     public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments) {
@@ -197,5 +224,21 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
     }
 }

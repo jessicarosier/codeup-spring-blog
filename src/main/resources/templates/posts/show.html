@@ -28,9 +28,8 @@
               <span th:if="${post.getLikedBy().size() == 0}">No likes</span>
             </p>
             <p th:if="${post.getLikedBy().size() > 0}">
-                 Likes: <a th:data="${post.getId()}" id="num-likes"
-                           th:href="@{/posts/posts.json/{id}(id=${post.getId()})}"
-                           th:text="${post.getLikedBy().size()}"></a>
+                 Likes: <span th:data="${post.getId()}" id="num-likes"
+                           th:text="${post.getLikedBy().size()}"></span>
             </p>
 
             <a th:href="@{/posts}" }>Go Back</a>
@@ -41,6 +40,9 @@
             <a th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit Post</a>
           </div>
         </div>
+        <ul id="user-likes">
+<!--    -->
+        </ul>
       </div>
     </div>
   </div>

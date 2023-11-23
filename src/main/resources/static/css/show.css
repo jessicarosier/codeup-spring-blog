@@ -1,9 +1,13 @@
+
 :root {
     --olive: #C9D57B;
     --dark-olive: #A1C35F;
     --darker-green: #649671;
     --bright-green: #94E67B;
     --cool-green: #83D3A3;
+    --button-green: #B3F98A;
+    --button-purple: #E2A2F2;
+    --card-color: #38405B;
     --heading-font: 'JetBrains Mono', monospace;
     --sub-heading-font: 'Cabin', sans-serif;
     --content-font: 'Spectral SC', serif;

@@ -1,5 +1,6 @@
 package com.codeup.codeupspringblog.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,12 +17,14 @@ public class Comment {
 
     // MANY COMMENTS CAN BELONG TO ONE USER
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 
 
     // MANY COMMENTS CAN BELONG TO ONE POST
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "post_id")
     private Post post;
 

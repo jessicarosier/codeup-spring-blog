@@ -11,9 +11,17 @@
       <div class="row">
         <div class="col d-flex justify-content-center form-wrapper w-100">
           <form class="d-flex flex-column justify-content-center" th:method="post"
-                action="/posts/create" th:object="${post}">
+                th:action="@{/posts/create}" th:object="${post}" novalidate>
+            <label> Title
             <input type="text" th:field="*{title}" name="title" placeholder="Enter Blog Post Title...">
-            <textarea type="text" th:field="*{body}" name="body" placeholder="Enter Blog Post content...."></textarea>
+              <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="error"></p>
+            </label>
+            <label>
+            <textarea type="text" th:field="*{body}" name="body" placeholder="Enter Blog Post content....">
+
+            </textarea>
+              <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" th:errorclass="error"></p>
+            </label>
             <button class="submit-button" type="submit">Submit</button>
           </form>
         </div>

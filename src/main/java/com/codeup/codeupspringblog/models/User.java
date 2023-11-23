@@ -3,6 +3,7 @@ package com.codeup.codeupspringblog.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -55,14 +56,17 @@ public class User {
 
     // ONE USER CAN HAVE MANY COMMENTS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name = "map_id", referencedColumnName = "id")
     private Map map;
 
 
     @ManyToMany(mappedBy = "likedBy")
+    @JsonIgnore
     private Set<Post> likedPosts = new HashSet<>();
 
     public User() {

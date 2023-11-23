@@ -5,8 +5,11 @@ import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
+import jakarta.validation.Valid;
+import org.hibernate.engine.jdbc.mutation.spi.BindingGroup;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -58,7 +61,14 @@ public class PostController {
 
 
     @PostMapping("/create")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute("post") @Valid Post post, BindingResult result, Model model) {
+
+        if(result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("post", post);
+            return "posts/create";
+        }
+
         User user = userDao.getUserById(1L);
         post.setUser(user);
         postDao.save(post);

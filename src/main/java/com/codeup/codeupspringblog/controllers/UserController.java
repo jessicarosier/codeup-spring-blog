@@ -1,6 +1,5 @@
 package com.codeup.codeupspringblog.controllers;
 
-
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import jakarta.validation.Valid;

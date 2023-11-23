@@ -1,7 +1,10 @@
 package com.codeup.codeupspringblog.models;//package com.codeup.codeupspringblog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -21,9 +24,11 @@ public class Post {
     private long id;
 
     @Column(name = "title", nullable = false, length = 250)
+    @NotEmpty(message = "Title cannot be blank")
     private String title;
 
     @Column(name = "body", length = 250)
+    @NotEmpty(message = "Post body cannot be blank")
     private String body;
 
     @Column(name = "image", length = 500)
@@ -37,10 +42,12 @@ public class Post {
 
     // ONE POST CAN HAVE MANY COMMENTS
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @JsonBackReference
     private List<Comment> comments;
 
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "post_likes",
             joinColumns = @JoinColumn(name = "post_id"),

@@ -25,7 +25,7 @@
             </form>
 
             <p>
-              <span th:if="${post.getLikedBy().size() == 0}">No likes </span>
+              <span th:if="${post.getLikedBy().size() == 0}">No likes</span>
             </p>
             <p th:if="${post.getLikedBy().size() > 0}">
                  Likes: <a th:data="${post.getId()}" id="num-likes"

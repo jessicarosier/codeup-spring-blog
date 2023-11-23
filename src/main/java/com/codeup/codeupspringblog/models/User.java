@@ -4,6 +4,8 @@ package com.codeup.codeupspringblog.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,16 +25,21 @@ public class User {
     private String username;
 
     @Column(name = "first_name", length = 250)
+    @NotEmpty(message = "First name cannot be blank")
     private String firstName;
 
     @Column(name = "last_name", length = 250)
+    @NotEmpty(message = "Last name cannot be blank")
     private String lastName;
 
     @Column(name = "email", length = 250, unique = true)
+    @NotEmpty(message = "Email cannot be blank")
+    @Email(message = "Please provide a valid email")
     private String email;
 
     @Column(name = "password", length = 500)
     @JsonIgnore
+    @NotEmpty(message = "Password cannot be blank")
     private String password;
 
     @Column(name = "avatar", length = 500)

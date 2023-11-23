@@ -10,8 +10,8 @@
     <div class="container">
       <div class="row">
         <div class="col d-flex flex-column justify-content-center form-wrapper w-100">
-          <form action="/user/sign-up" th:object="${user}" th:method="post" class="d-flex flex-column"
-                id="register-form">
+          <form th:method="post" th:action="@{/user/sign-up}" th:object="${user}" class="d-flex flex-column"
+                id="register-form" novalidate>
             <div class="form-group d-flex flex-column gap-2">
               <label for="username">Username
                 <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
@@ -20,18 +20,25 @@
               <label for="firstname">First Name
                 <input type="text" th:field="*{firstName}" name="firstname" class="form-control" id="firstname"
                        placeholder="Your First Name">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></p>
               </label>
+
               <label for="lastname">Last Name
                 <input type="text" th:field="*{lastName}" name="lastname" class="form-control" id="lastname"
                        placeholder="Your Last Name">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"></p>
               </label>
+
               <label for="email">Email
                 <input type="text" th:field="*{email}" name="email" class="form-control" id="email"
                        placeholder="Your email">
+                <!--  below: if the field has errors, display them -->
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></p>
               </label>
               <label for="password">Password
                 <input type="password" th:field="*{password}" name="password" class="form-control" id="password"
                        placeholder="Enter Password">
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></p>
               </label>
               <label for="password-confirm">Confirm Password
                 <input type="password" name="password-confirm" class="form-control" id="password-confirm"
@@ -42,6 +49,7 @@
             </div>
           </form>
           <button id="register-button" type="submit" class="btn btn-primary">Register</button>
+
 
         </div>
       </div>

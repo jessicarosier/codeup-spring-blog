@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,11 +26,14 @@ public class Post {
     @Column(nullable = false)
     private long id;
 
+    @Column(name = "date")
+    private String createdAt;
+
     @Column(name = "title", nullable = false, length = 250)
     @NotEmpty(message = "Title cannot be blank")
     private String title;
 
-    @Column(name = "body", length = 250)
+    @Column(name = "body", length = 5000)
     @NotEmpty(message = "Post body cannot be blank")
     private String body;
 
@@ -54,6 +60,35 @@ public class Post {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> likedBy = new HashSet<>();
 
+
+    public Post(String  createdAt, String title, String body, String image, User user) {
+        this.createdAt = createdAt;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+    }
+
+    public Post(String  createdAt, String title, String body, String image, User user, List<Comment> comments, Set<User> likedBy) {
+        this.createdAt = createdAt;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+        this.comments = comments;
+        this.likedBy = likedBy;
+    }
+
+    public Post(long id, String createdAt, String title, String body, String image, User user, List<Comment> comments, Set<User> likedBy) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user = user;
+        this.comments = comments;
+        this.likedBy = likedBy;
+    }
 
     public Post(long id, String title, String body, String image, User user, List<Comment> comments, Set<User> likedBy) {
         this.id = id;
@@ -179,5 +214,13 @@ public class Post {
 
     public void setLikedBy(Set<User> likedBy) {
         this.likedBy = likedBy;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String  createdAt) {
+        this.createdAt = createdAt;
     }
 }

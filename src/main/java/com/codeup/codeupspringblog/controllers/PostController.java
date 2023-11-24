@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -69,10 +70,10 @@ public class PostController {
             return "posts/create";
         }
 
-        User user = userDao.getUserById(1L);
+        User user = userDao.getUserById(2L);
         post.setUser(user);
         postDao.save(post);
-        emailService.prepareAndSend(post, "New Post", "Check out this new post!");
+//        emailService.prepareAndSend(post, "New Post", "Check out this new post!");
         return "redirect:/posts";
     }
 

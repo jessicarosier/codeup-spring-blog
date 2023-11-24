@@ -31,11 +31,48 @@
     flex-direction: column;
     gap: 5px;
     border-radius: 4px;
-    padding: 50px 0;
+    padding: 50px;
     min-height: fit-content;
     min-width: 50dvw;
     align-items: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+    .left-side {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+        width: 100%;
+
+        & img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 4px;
+        }
+    }
+
+    .right-side {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+        width: 100%;
+
+        .post-title {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            color: var(--darker-green);
+            text-align: center;
+        }
+    }
+
+    .like-buttons {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        width: 100%;
+    }
+
 }
 
 .delete-button {

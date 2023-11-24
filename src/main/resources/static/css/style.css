@@ -29,3 +29,8 @@ a {
     flex-direction: column;
     height: 100dvh;
 }
+
+.main-logo {
+    height: 75dvh;
+
+}

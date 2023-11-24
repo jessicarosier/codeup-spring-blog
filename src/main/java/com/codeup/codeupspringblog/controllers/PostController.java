@@ -70,7 +70,7 @@ public class PostController {
             return "posts/create";
         }
 
-        User user = userDao.getUserById(2L);
+        User user = userDao.getUserById(1L);
         post.setUser(user);
         postDao.save(post);
 //        emailService.prepareAndSend(post, "New Post", "Check out this new post!");

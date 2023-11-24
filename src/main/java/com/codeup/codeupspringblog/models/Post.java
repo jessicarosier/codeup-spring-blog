@@ -34,6 +34,8 @@ public class Post {
     private String title;
 
     @Column(name = "body", length = 5000)
+    //allow to have white space beteen sentences
+
     @NotEmpty(message = "Post body cannot be blank")
     private String body;
 

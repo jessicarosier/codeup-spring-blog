@@ -20,6 +20,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 .page-wrapper {
     display: flex;
     flex-direction: column;
@@ -71,11 +75,31 @@
         gap: 5px;
         align-items: center;
         width: 100%;
+        justify-content: center;
+
     }
 
 }
 
-.delete-button {
+.like-button, .unlike-button {
+    border: none;
+    background-color: var(--button-purple);
+    color: white;
+    border-radius: 50px;
+    width: 50px;
+    padding: 10px;
+    margin-top: 10px;
+    align-self: center;
+
+    &:hover {
+        color: black;
+        background-color: #C9D57B;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+
+}
+
+.de-button {
     border: none;
     background-color: #649671;
     color: white;

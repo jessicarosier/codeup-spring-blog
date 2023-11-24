@@ -15,6 +15,7 @@
             <textarea type="text" th:field="*{body}" name="body" th:text="${post.getBody()}"></textarea>
             <input th:hidden="true" th:field="*{id}" th:value="${post.getId()}" th:name="id" />
             <input th:hidden="true" th:field="*{user}" th:value="${post.getUser()}" th:name="id" />
+            <input th:hidden="true" th:field="*{createdAt}" th:value="${post.getCreatedAt()}" th:name="createdAt"/>
             <button class="submit-button" type="submit">Submit</button>
           </form>
         </div>

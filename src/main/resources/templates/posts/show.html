@@ -3,7 +3,7 @@
 <head th:replace="partials/fragments :: head('Blog Posts', '/css/show.css')">
 <body>
 <nav th:replace="partials/fragments :: nav"></nav>
-<header th:replace="partials/fragments :: header('View Post Details')"></header>
+<header th:replace="partials/fragments :: header('')"></header>
 <main>
   <div class="page-wrapper">
     <div class="container">
@@ -11,48 +11,62 @@
         <div class="col d-flex flex-column align-items-center">
           <div class="single-post-wrapper">
             <div>
-            <div class="left-side">
-              <p th:text="'Posted on: ' + ${post.getCreatedAt()}"></p>
-              <h3 class="post-title" th:text="${post.getTitle()}"></h3>
-              <img src="https://placehold.co/800X400" alt="Post Image">
-            </div>
-            <div class="right-side">
-              <p th:text="${post.getBody()}"></p>
-              <p>By: <span th:text="${post.getUser().getEmail()}"></span></p>
-            </div>
+              <div class="left-side">
+                <p th:text="'Posted on: ' + ${post.getCreatedAt()}"></p>
+                <h3 class="post-title" th:text="${post.getTitle()}"></h3>
+                <img src="https://placehold.co/800X400" alt="Post Image">
+              </div>
+              <div class="right-side">
+                <p th:text="${post.getBody()}"></p>
+                <p>By: <span th:text="${post.getUser().getEmail()}"></span></p>
+              </div>
             </div>
 
             <!--   Add Logic, if loggedIn user has already liked this post, display unlike button instead   -->
             <div class="like-buttons">
-              <form method="post" action="/posts/like">
-                <input th:hidden="true" name="id" th:value="${post.getId()}">
-                <button class="like-button" type="submit">Like</button>
-              </form>
-              <form method="post" action="/posts/unlike">
-                <input th:hidden="true" name="id" th:value="${post.getId()}">
-                <button class="unlike-button" type="submit">Unlike</button>
-              </form>
+              <div>
+                <form method="post" action="/posts/like">
+                  <input th:hidden="true" name="id" th:value="${post.getId()}">
+                  <button class="like-button" type="submit">
+                    <img src="/assets/img/thumbs-up.svg"/>
+                  </button>
+                </form>
+                <p th:if="${post.getLikedBy().size() > 0}">
+                  Likes: <span th:data="${post.getId()}" id="num-likes"
+                               th:text="${post.getLikedBy().size()}"></span>
+                </p>
+              </div>
+              <div>
+                <form method="post" action="/posts/unlike">
+                  <input th:hidden="true" name="id" th:value="${post.getId()}">
+                  <button class="unlike-button" type="submit">
+                    <img src="/assets/img/thumbs-down.svg"/>
+                  </button>
+                </form>
+              </div>
+              <!--              <p>-->
+              <!--                <span th:if="${post.getLikedBy().size() == 0}">No likes</span>-->
+              <!--              </p>-->
+              <!--              <p th:if="${post.getLikedBy().size() > 0}">-->
+              <!--                Likes: <span th:data="${post.getId()}" id="num-likes"-->
+              <!--                             th:text="${post.getLikedBy().size()}"></span>-->
+              <!--              </p>-->
             </div>
 
-            <p>
-              <span th:if="${post.getLikedBy().size() == 0}">No likes</span>
-            </p>
-            <p th:if="${post.getLikedBy().size() > 0}">
-              Likes: <span th:data="${post.getId()}" id="num-likes"
-                           th:text="${post.getLikedBy().size()}"></span>
-            </p>
 
-            <a th:href="@{/posts}" }>Go Back</a>
-            <form method="post" action="/posts/delete">
-              <input th:hidden="true" name="id" th:value="${post.getId()}">
-              <button class="delete-button" type="submit">Delete Post</button>
-            </form>
-            <a th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit Post</a>
+            <a th:href="@{/posts}">Go Back</a>
+            <div class="d-flex">
+              <form method="post" action="/posts/delete">
+                <input th:hidden="true" name="id" th:value="${post.getId()}">
+                <button class="de-button" type="submit">Delete Post</button>
+              </form>
+              <a class="de-button text-center" th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit Post</a>
+            </div>
           </div>
+          <ul id="user-likes">
+            <!--    -->
+          </ul>
         </div>
-        <ul id="user-likes">
-          <!--    -->
-        </ul>
       </div>
     </div>
   </div>

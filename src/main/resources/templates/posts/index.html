@@ -15,7 +15,8 @@
           </div>
           <div class="d-flex flex-column post-body">
             <h3 th:text="${post.getTitle()}"></h3>
-            <p th:text="${post.getBody().substring(0, 300)} + '...'"></p>
+            <p class="body-text" th:if="${post.getBody().length() > 300}"
+               th:text="${post.getBody().substring(0, 300)} + '...'"></p>
             <a class="view-post" th:href="@{/posts/{id}(id=${post.getId()})}">Read More</a>
           </div>
         </div>

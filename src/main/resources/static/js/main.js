@@ -1,7 +1,7 @@
-console.log("test");
 
-let url = "http://localhost:8080/posts.json";
-let url2 = `http://localhost:8080/api/posts/likes/${7}`;
+
+
+let url = `http://localhost:8080/api/posts/likes`;
 let options = {
     method: "GET",
     headers: {
@@ -9,24 +9,35 @@ let options = {
     },
 };
 
-//async fetch request
+
+
 async function getPosts() {
     let response = await fetch(url, options);
     let data = await response.json();
     console.log(data);
     return data;
-
 }
 
-let posts = getPosts();
-console.log(posts);
 
-async function getPosts2() {
-    let response = await fetch(url2, options);
-    let data = await response.json();
-    console.log(data);
-    return data;
-}
+(async function () {
+    let posts = await getPosts();
+    const topPostsContainer = document.getElementById("top-posts");
 
-let posts2 = getPosts2();
-console.log(posts2);
+    posts.forEach((post) => {
+        let postCard = document.createElement("div");
+        postCard.classList.add("post-card");
+
+        postCard.innerHTML = `
+        <p>${post.createdAt}</p>
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+        
+        
+       <a href=/posts/${post.id}>Read More</a>
+    `;
+
+        topPostsContainer.appendChild(postCard);
+    });
+})();
+
+

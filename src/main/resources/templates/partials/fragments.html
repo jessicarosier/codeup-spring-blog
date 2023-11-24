@@ -12,7 +12,7 @@
   <link rel="stylesheet" th:href="${stylesheet}">
 </head>
 <body>
-<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-white bg-white border">
   <div class="container">
     <a class="navbar-brand" href="/">A&A Blog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -25,7 +25,7 @@
           <a class="nav-link" th:href="@{/posts}">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/posts/create}">New Post</a>
+          <a class="nav-link" th:href="@{/posts/create}"><img src="/assets/img/pencil-square.svg"/>   Write</a>
         </li>
         <li class="nav-item ms-auto">
           <a class="nav-link" th:href="@{/user/sign-up}">Sign-up</a>

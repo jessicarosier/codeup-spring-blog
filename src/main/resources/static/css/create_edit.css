@@ -45,12 +45,14 @@ body {
         & input {
             padding: 10px;
             border-radius: 4px;
+            width: 75%;
         }
 
         & textarea {
             padding: 10px;
             min-height: 300px;
             border-radius: 4px;
+            width: 75%;
         }
 
         & .submit-button {
@@ -72,6 +74,14 @@ body {
 
 
     }
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 

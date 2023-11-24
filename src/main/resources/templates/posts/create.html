@@ -10,13 +10,13 @@
     <div class="container">
       <div class="row">
         <div class="col d-flex justify-content-center form-wrapper w-100">
-          <form class="d-flex flex-column justify-content-center" th:method="post"
+          <form class="d-flex flex-column" th:method="post"
                 th:action="@{/posts/create}" th:object="${post}" novalidate>
-            <label>Date:
+            <label>
               <input type="date" th:field="*{createdAt}" name="date" placeholder="Enter Blog Post Date...">
               <p th:if="${#fields.hasErrors('createdAt')}" th:errors="*{createdAt}" th:errorclass="error"></p>
             </label>
-            <label> Title
+            <label>
             <input type="text" th:field="*{title}" name="title" placeholder="Enter Blog Post Title...">
               <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="error"></p>
             </label>

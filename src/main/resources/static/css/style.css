@@ -20,6 +20,8 @@
     box-sizing: border-box;
 }
 
+
+
 a {
     text-decoration: none;
 }
@@ -31,6 +33,23 @@ a {
 }
 
 .main-logo {
-    height: 75dvh;
+    height: 50dvh;
 
+}
+
+.de-button {
+    border: none;
+    background-color: #649671;
+    color: white;
+    border-radius: 50px;
+    min-width: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    align-self: center;
+
+    &:hover {
+        color: black;
+        background-color: #C9D57B;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
 }

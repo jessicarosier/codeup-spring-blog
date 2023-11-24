@@ -50,4 +50,11 @@ public class PostRestController {
         }
         return users;
     }
+
+    //get most liked posts
+    @GetMapping("/api/posts/likes")
+    public @ResponseBody List<Post> getMostLikedPosts() {
+        List<Post> posts = new ArrayList<>();
+        return postDao.findAllByOrderByLikedByDesc();
+    }
 }

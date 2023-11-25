@@ -115,3 +115,22 @@ a {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     }
 }
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 4px;
+    padding: 10px;
+    min-height: fit-content;
+    max-width: 30dvw;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+    .comment-author {
+        font-family: var(--heading-font);
+        font-size: 1.5rem;
+        color: var(--darker-green);
+        text-align: center;
+    }
+
+}

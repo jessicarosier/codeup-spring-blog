@@ -57,4 +57,12 @@ public class PostRestController {
         List<Post> posts = new ArrayList<>();
         return postDao.findAllByOrderByLikedByDesc();
     }
+
+
+    //get most recent posts
+    @GetMapping("/api/posts/recent")
+    public @ResponseBody List<Post> getMostRecentPosts() {
+        List<Post> posts = new ArrayList<>();
+        return postDao.findAllByOrderByCreatedAtDesc();
+    }
 }

@@ -14,8 +14,10 @@
           </div>
 
           <div class="d-flex flex-column align-items-center justify-content-center">
-            <h1 class="display-4 text-center">Welcome to my Blog.</h1>
-            <p class="text-center">A blog about....</p>
+            <h1 class="display-4 text-center">
+              {  Welcome to the Blog  }
+            </h1>
+
             <a class="de-button text-center" th:href="@{/posts}">Start Reading</a>
           </div>
         </div>
@@ -28,11 +30,38 @@
         <div class="row mt-5">
           <div class="col">
             <div id="top-posts">
-
+          <!--Dynamically interested with JavaScript-->
             </div>
-
           </div>
         </div>
+      </div>
+
+    <div class="col">
+      <!-- featured posts -->
+      <h2 class="text-center mt-5">Recent Posts</h2>
+      <div class="row mt-5">
+        <div class="col">
+          <div id="recent-posts">
+            <!--Dynamically interested with JavaScript-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="col">
+        <!-- featured posts -->
+        <h2 class="text-center mt-5">Browse by category</h2>
+        <div class="row mt-5">
+          <div class="col">
+            <div id="categories">
+              <!--Dynamically interested with JavaScript-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
         <th:block th:replace="partials/fragments :: scripts('/js/main.js')"></th:block>
 </body>
 </html>

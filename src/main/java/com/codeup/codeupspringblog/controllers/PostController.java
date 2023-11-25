@@ -125,28 +125,6 @@ public class PostController {
         return "redirect:/posts/" + id;
     }
 
-    /* GET LIST OF USERS THAT LIKED A POST AND GIVE IT TO THE FRONTEND*/
-
-    @GetMapping("/posts.json")
-    public @ResponseBody List<Post> viewAllPostsInJSONFormat() {
-        return postDao.findAll();
-    }
-
-    @GetMapping("/posts.json/{id}")
-    public @ResponseBody List<Post> viewAllPostsInJSONFormat(@PathVariable long id) {
-        return postDao.findAllById(Collections.singleton(id));
-    }
-
-    @GetMapping("/posts/ajax")
-    public String viewAllPostsInAJAXFormat() {
-        return "posts/ajax";
-    }
-
-
-    @GetMapping("/posts/ajax/{id}.json")
-    public @ResponseBody Post viewSinglePostInJSONFormat(@PathVariable long id) {
-        return postDao.getPostById(id);
-    }
 
 
 }

@@ -67,7 +67,32 @@
             <!--    -->
           </ul>
         </div>
+
+
+        <div class="col">
+          <div class="col d-flex flex-column align-items-center">
+            <div class="comments-wrapper">
+              <h3>Comments</h3>
+              <form method="post" action="/comments/create">
+                <input th:hidden="true" name="postId" th:value="${post.getId()}">
+                <textarea class="text-center" name="body" placeholder="Add a comment..."></textarea>
+                <button class="comment-button" type="submit">Comment</button>
+              </form>
+            </div>
+            <div class="comments">
+              <div class="comment">
+                <p class="comment-author">username</p>
+                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eum,
+                  laborum odio pariatur quas quo similique unde. Aliquid cupiditate nesciunt reiciendis. Distinctio
+                  dolores ipsam nisi. Doloremque ducimus eum quas quasi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </div>
 </main>

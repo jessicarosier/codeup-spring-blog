@@ -59,10 +59,6 @@ public class User {
     @JsonBackReference
     private List<Comment> comments;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JoinColumn(name = "map_id", referencedColumnName = "id")
-    private Map map;
 
 
     @ManyToMany(mappedBy = "likedBy")
@@ -73,7 +69,7 @@ public class User {
 
     }
 
-    public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments, Map map, Set<Post> likedPosts) {
+    public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments, Set<Post> likedPosts) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -83,7 +79,6 @@ public class User {
         this.avatar = avatar;
         this.posts = posts;
         this.comments = comments;
-        this.map = map;
         this.likedPosts = likedPosts;
     }
 
@@ -237,13 +232,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Map getMap() {
-        return map;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
-    }
 
     public Set<Post> getLikedPosts() {
         return likedPosts;

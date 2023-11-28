@@ -60,7 +60,6 @@ public class User {
     private List<Comment> comments;
 
 
-
     @ManyToMany(mappedBy = "likedBy")
     @JsonIgnore
     private Set<Post> likedPosts = new HashSet<>();

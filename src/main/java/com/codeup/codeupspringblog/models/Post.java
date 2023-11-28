@@ -63,8 +63,6 @@ public class Post {
     private Set<User> likedBy = new HashSet<>();
 
 
-
-
     public Post(String  createdAt, String title, String body, String image, User user) {
         this.createdAt = createdAt;
         this.title = title;

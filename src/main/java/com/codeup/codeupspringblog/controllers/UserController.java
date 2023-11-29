@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +16,12 @@ public class UserController {
 
     // DEPENDENCY INJECTION
     private final UserRepository userDao;
+    private PasswordEncoder passwordEncoder;
 
     // INSTANTIATES A NEW POST REPOSITORY WHICH IS USED TO ACCESS THE DATABASE
-    public UserController(UserRepository userDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/sign-up")
@@ -39,9 +42,8 @@ public class UserController {
             return "users/register";
         }
 
-        String hashedPsswd = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-        user.setPassword(hashedPsswd);
-
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         userDao.save(user);
         return "redirect:/user/login";
     }

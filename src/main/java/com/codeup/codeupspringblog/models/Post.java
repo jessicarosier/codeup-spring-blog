@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 
 @Entity
 @Table(name = "blog_posts")

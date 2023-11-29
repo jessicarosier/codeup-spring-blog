@@ -7,6 +7,7 @@ import com.codeup.codeupspringblog.repositories.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
 import jakarta.validation.Valid;
 import org.hibernate.engine.jdbc.mutation.spi.BindingGroup;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +41,7 @@ public class PostController {
     //  GET ALL POSTS
     @GetMapping()
     public String getIndexPage(Model model) {
-        model.addAttribute("posts", postDao.findAll());
+//        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
@@ -63,6 +64,8 @@ public class PostController {
 
     @PostMapping("/create")
     public String createPost(@ModelAttribute("post") @Valid Post post, BindingResult result, Model model) {
+         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 
         if(result.hasErrors()) {
             model.addAttribute("errors", result.getAllErrors());
@@ -70,7 +73,7 @@ public class PostController {
             return "posts/create";
         }
 
-        User user = userDao.getUserById(1L);
+        User user = userDao.getUserById(loggedInUser.getId());
         post.setUser(user);
         postDao.save(post);
         emailService.prepareAndSend(post, "New Post", "Check out this new post!");

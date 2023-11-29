@@ -1,101 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/fragments :: head('Blog Posts', '/css/show.css')">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<head th:replace="partials/fragments :: head('Blog Posts', '/css/show.css')">-->
+<head></head>
 <body>
-<nav th:replace="partials/fragments :: nav"></nav>
-<header th:replace="partials/fragments :: header('')"></header>
-<main>
-  <div class="page-wrapper">
-    <div class="container">
-      <div class="row">
-        <div class="col d-flex flex-column align-items-center">
-          <div class="single-post-wrapper">
-            <div>
-              <div class="left-side">
-                <p th:text="'Posted on: ' + ${post.getCreatedAt()}"></p>
-                <h3 class="post-title" th:text="${post.getTitle()}"></h3>
-                <img src="https://placehold.co/800X400" alt="Post Image">
-              </div>
-              <div class="right-side">
-                <p th:text="${post.getBody()}"></p>
-                <p>By: <span th:text="${post.getUser().getEmail()}"></span></p>
-              </div>
-            </div>
+<h1>DOES THIS WORK</h1>
+<!--<nav th:replace="partials/fragments :: nav"></nav>-->
+<!--<header th:replace="partials/fragments :: header('')"></header>-->
+<!--<main>-->
+<!--  <div class="page-wrapper">-->
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col d-flex flex-column align-items-center">-->
+<!--          <div class="single-post-wrapper">-->
+<!--            <div>-->
+<!--              <div class="left-side">-->
+<!--                <p th:text="'Posted on: ' + ${post.getCreatedAt()}"></p>-->
+<!--                <h3 class="post-title" th:text="${post.getTitle()}"></h3>-->
+<!--                <img src="https://placehold.co/800X400" alt="Post Image">-->
+<!--              </div>-->
+<!--              <div class="right-side">-->
+<!--                <p th:text="${post.getBody()}"></p>-->
+<!--                <p>By: <span th:text="${post.getUser().getEmail()}"></span></p>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <!--   Add Logic, if loggedIn user has already liked this post, display unlike button instead   -->
-            <div class="like-buttons">
-              <div>
-                <form method="post" action="/posts/like">
-                  <input th:hidden="true" name="id" th:value="${post.getId()}">
-                  <button class="like-button" type="submit">
-                    <img src="/assets/img/thumbs-up.svg"/>
-                  </button>
-                </form>
-                <p th:if="${post.getLikedBy().size() > 0}">
-                  Likes: <span th:data="${post.getId()}" id="num-likes"
-                               th:text="${post.getLikedBy().size()}"></span>
-                </p>
-              </div>
-              <div>
-                <form method="post" action="/posts/unlike">
-                  <input th:hidden="true" name="id" th:value="${post.getId()}">
-                  <button class="unlike-button" type="submit">
-                    <img src="/assets/img/thumbs-down.svg"/>
-                  </button>
-                </form>
-              </div>
-              <!--              <p>-->
-              <!--                <span th:if="${post.getLikedBy().size() == 0}">No likes</span>-->
-              <!--              </p>-->
-              <!--              <p th:if="${post.getLikedBy().size() > 0}">-->
-              <!--                Likes: <span th:data="${post.getId()}" id="num-likes"-->
-              <!--                             th:text="${post.getLikedBy().size()}"></span>-->
-              <!--              </p>-->
-            </div>
-
-
-            <a th:href="@{/posts}">Go Back</a>
-            <div class="d-flex">
-              <form method="post" action="/posts/delete">
-                <input th:hidden="true" name="id" th:value="${post.getId()}">
-                <button class="de-button" type="submit">Delete Post</button>
-              </form>
-              <a class="de-button text-center" th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit Post</a>
-            </div>
-          </div>
-          <ul id="user-likes">
-            <!--    -->
-          </ul>
-        </div>
+<!--            &lt;!&ndash;   Add Logic, if loggedIn user has already liked this post, display unlike button instead   &ndash;&gt;-->
+<!--            <div class="like-buttons">-->
+<!--              <div>-->
+<!--                <form th:method="post" th:action="@{/posts/like}">-->
+<!--                  <input th:hidden="true" name="id" th:value="${post.getId()}">-->
+<!--                  <button class="like-button" type="submit">-->
+<!--                    <img src="/assets/img/thumbs-up.svg"/>-->
+<!--                  </button>-->
+<!--                </form>-->
+<!--                <p th:if="${post.getLikedBy().size() > 0}">-->
+<!--                  Likes: <span th:data="${post.getId()}" id="num-likes"-->
+<!--                               th:text="${post.getLikedBy().size()}"></span>-->
+<!--                </p>-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <form th:method="post" th:action="@{/posts/unlike}">-->
+<!--                  <input th:hidden="true" name="id" th:value="${post.getId()}">-->
+<!--                  <button class="unlike-button" type="submit">-->
+<!--                    <img src="/assets/img/thumbs-down.svg"/>-->
+<!--                  </button>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--              &lt;!&ndash;              <p>&ndash;&gt;-->
+<!--              &lt;!&ndash;                <span th:if="${post.getLikedBy().size() == 0}">No likes</span>&ndash;&gt;-->
+<!--              &lt;!&ndash;              </p>&ndash;&gt;-->
+<!--              &lt;!&ndash;              <p th:if="${post.getLikedBy().size() > 0}">&ndash;&gt;-->
+<!--              &lt;!&ndash;                Likes: <span th:data="${post.getId()}" id="num-likes"&ndash;&gt;-->
+<!--              &lt;!&ndash;                             th:text="${post.getLikedBy().size()}"></span>&ndash;&gt;-->
+<!--              &lt;!&ndash;              </p>&ndash;&gt;-->
+<!--            </div>-->
 
 
-        <div class="col">
-          <div class="col d-flex flex-column align-items-center">
-            <div class="comments-wrapper">
-              <h3>Comments</h3>
-              <form method="post" action="/comments/create">
-                <input th:hidden="true" name="postId" th:value="${post.getId()}">
-                <textarea class="text-center" name="body" placeholder="Add a comment..."></textarea>
-                <button class="comment-button" type="submit">Comment</button>
-              </form>
-            </div>
-            <div class="comments">
-              <div class="comment">
-                <p class="comment-author">username</p>
-                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eum,
-                  laborum odio pariatur quas quo similique unde. Aliquid cupiditate nesciunt reiciendis. Distinctio
-                  dolores ipsam nisi. Doloremque ducimus eum quas quasi.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+<!--            <a th:href="@{/posts}">Go Back</a>-->
+<!--            <div class="d-flex">-->
+<!--              <form th:method="post" th:action="@{/posts/delete}">-->
+<!--                <input th:hidden="true" name="id" th:value="${post.getId()}">-->
+<!--                <button class="de-button" type="submit">Delete Post</button>-->
+<!--              </form>-->
+<!--              <a class="de-button text-center" th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit Post</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <ul id="user-likes">-->
+<!--            &lt;!&ndash;    &ndash;&gt;-->
+<!--          </ul>-->
+<!--        </div>-->
 
-      </div>
+<!--        <div class="col">-->
+<!--          <div class="col d-flex flex-column align-items-center">-->
+<!--            <div class="comments-wrapper">-->
+<!--              <h3>Comments</h3>-->
+<!--              <form th:method="post" th:action="@{/comments/create}">-->
+<!--                <input th:hidden="true" name="postId" th:value="${post.getId()}">-->
+<!--                <textarea class="text-center" name="body" placeholder="Add a comment..."></textarea>-->
+<!--                <button class="comment-button" type="submit">Comment</button>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--            <div class="comments">-->
+<!--              <div class="comment">-->
+<!--                <p class="comment-author">username</p>-->
+<!--                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eum,-->
+<!--                  laborum odio pariatur quas quo similique unde. Aliquid cupiditate nesciunt reiciendis. Distinctio-->
+<!--                  dolores ipsam nisi. Doloremque ducimus eum quas quasi.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
-    </div>
-  </div>
-</main>
-<th:block th:replace="partials/fragments :: scripts('/js/show.js')"></th:block>
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</main>-->
+<!--<th:block th:replace="partials/fragments :: scripts('/js/show.js')"></th:block>-->
 </body>
 </html>

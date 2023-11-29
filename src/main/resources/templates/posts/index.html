@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{partials/fragments :: head('Blog Posts', '/css/posts-index.css')}"></head>
+<!--<head th:replace="~{partials/fragments :: head('Blog Posts', '/css/posts-index.css')}"></head>-->
+<head></head>
 <body>
-<nav th:replace="~{partials/fragments :: nav}"></nav>
-<header th:replace="~{partials/fragments :: header('Blog Posts')}"></header>
-<main>
-  <div class="page-wrapper">
-    <div class="container">
-      <div class="col d-flex flex-column gap-3 justify-content-center align-items-center flex-wrap">
-        <div class="post-wrapper" th:each="post : ${posts}">
-          <div class="d-flex flex-column justify-content-center">
-            <p th:text="${post.createdAt}" name="date"></p>
-            <img id="blog-image" src="https://placehold.co/400x400" alt="blog image">
-          </div>
-          <div class="d-flex flex-column post-body">
-            <h3 th:text="${post.getTitle()}"></h3>
-            <p class="body-text" th:if="${post.getBody().length() > 300}"
-               th:text="${post.getBody().substring(0, 300)} + '...'"></p>
-            <a class="view-post" th:href="@{/posts/{id}(id=${post.getId()})}">Read More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-<th:block th:replace="~{partials/fragments :: scripts('/js/main.js')}"></th:block>
+<h1>TEST</h1>
+<!--<nav th:replace="~{partials/fragments :: nav}"></nav>-->
+<!--<header th:replace="~{partials/fragments :: header('Blog Posts')}"></header>-->
+<!--<main>-->
+<!--  <div class="page-wrapper">-->
+<!--    <div class="container">-->
+<!--      <div class="col d-flex flex-column gap-3 justify-content-center align-items-center flex-wrap">-->
+<!--        <div class="post-wrapper" th:each="post : ${posts}">-->
+<!--          <div class="d-flex flex-column justify-content-center">-->
+<!--            <p th:text="${post.createdAt}" name="date"></p>-->
+<!--            <img id="blog-image" src="https://placehold.co/400x400" alt="blog image">-->
+<!--          </div>-->
+<!--          <div class="d-flex flex-column post-body">-->
+<!--            <h3 th:text="${post.getTitle()}"></h3>-->
+<!--            <p class="body-text" th:if="${post.getBody().length() > 300}"-->
+<!--               th:text="${post.getBody().substring(0, 300)} + '...'"></p>-->
+<!--            <a class="view-post" th:href="@{/posts/{id}(id=${post.getId()})}">Read More</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</main>-->
+<!--<th:block th:replace="~{partials/fragments :: scripts('/js/main.js')}"></th:block>-->
 </body>
 </html>

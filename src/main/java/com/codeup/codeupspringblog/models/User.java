@@ -68,6 +68,21 @@ public class User {
 
     }
 
+//AUTHENTICATION CONSTRUCTOR
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        username = copy.username;
+        email = copy.email;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        avatar = copy.avatar;
+        posts = copy.posts;
+        comments = copy.comments;
+        likedPosts = copy.likedPosts;
+    }
+
+
     public User(long id, String username, String firstName, String lastName, String email, String password, String avatar, List<Post> posts, List<Comment> comments, Set<Post> likedPosts) {
         this.id = id;
         this.username = username;

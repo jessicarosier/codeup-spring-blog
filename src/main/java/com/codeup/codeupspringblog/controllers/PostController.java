@@ -41,7 +41,7 @@ public class PostController {
     //  GET ALL POSTS
     @GetMapping()
     public String getIndexPage(Model model) {
-//        model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 

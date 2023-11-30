@@ -56,22 +56,21 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
-                /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .authorizeHttpRequests((requests) -> requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
-//                        .requestMatchers("/posts/create", "/posts/edit/*", "/posts/edit", "/posts/delete", "/posts/like", "/posts/unlike").authenticated()
+                        .requestMatchers("/posts/create", "/posts/edit/*", "/posts/edit", "/posts/delete", "/posts/*").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers("/", "/login", "/posts").permitAll()
                         // allow loading of static resources
-                        .requestMatchers("/css/**", "/js/**", "/assets/**",  "/api/**").permitAll()
+                        .requestMatchers("/js/**", "/assets/**", "/css/**", "/api/**").permitAll()
                 )
-                ;
-//                .httpBasic(withDefaults());
+                /* Login configuration */
+                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
+                /* Logout configuration */
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
+                .httpBasic(withDefaults());
         return http.build();
     }
 

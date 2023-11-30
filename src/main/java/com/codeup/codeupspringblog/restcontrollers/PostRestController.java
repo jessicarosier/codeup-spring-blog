@@ -32,12 +32,6 @@ public class PostRestController {
 
     }
 
-    @GetMapping("/posts.json")
-    public @ResponseBody List<Post> viewAllPostsInJSONFormat() {
-        return postDao.findAll();
-    }
-
-
 
     //returns a list of users who have liked a post
     @GetMapping("/api/posts/likes" + "/{id}")

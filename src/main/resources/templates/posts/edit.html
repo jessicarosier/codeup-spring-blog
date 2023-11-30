@@ -9,7 +9,7 @@
     <div class="container">
       <div class="row">
         <div class="col d-flex flex-column align-items-center form-wrapper w-100">
-          <form action="/posts/edit" th:method="post" th:object="${post}"
+          <form th:action="@{/posts/edit}" th:method="post" th:object="${post}"
                 class="d-flex flex-column justify-content-center">
             <input type="text" th:field="*{title}" th:value="${post.getTitle()}" th:name="title" />
             <textarea type="text" th:field="*{body}" name="body" th:text="${post.getBody()}"></textarea>

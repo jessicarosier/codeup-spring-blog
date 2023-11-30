@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{partials/fragments :: head('Reister', '/css/register.css')}"></head>
+<head th:replace="~{partials/fragments :: head('Sign Up!', '/css/register.css')}"></head>
 <body>
 <nav th:replace="~{partials/fragments :: nav}"></nav>
-<header th:replace="~{partials/fragments :: header('Register')}"></header>
+<header th:replace="~{partials/fragments :: header('Sign Up!')}"></header>
 <main>
   <div class="page-wrapper">
     <div class="container">
       <div class="row">
         <div class="col d-flex flex-column justify-content-center form-wrapper w-100">
-          <form th:method="post" th:action="@{/user/sign-up}" th:object="${user}" class="d-flex flex-column"
-                id="register-form" novalidate>
+          <form th:method="POST" th:action="@{/sign-up}" th:object="${user}" class="d-flex flex-column" id="register-form">
             <div class="form-group d-flex flex-column gap-2">
               <label for="username">Username
-                <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
+                <input th:field="*{username}" name="username" class="form-control" id="username"
                        placeholder="Enter username">
               </label>
               <label for="firstname">First Name
-                <input type="text" th:field="*{firstName}" name="firstname" class="form-control" id="firstname"
+                <input th:field="*{firstName}" name="firstname" class="form-control" id="firstname"
                        placeholder="Your First Name">
                 <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"></p>
               </label>
@@ -47,8 +46,9 @@
               <p id="password-error"></p>
               <input id="map" th:hidden="true">
             </div>
+            <button id="register-button" type="submit" class="btn btn-primary">Register</button>
           </form>
-          <button id="register-button" type="submit" class="btn btn-primary">Register</button>
+
 
 
         </div>

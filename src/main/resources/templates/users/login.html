@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="partials/fragments :: head('Login', '/css/create_user.css')">
+<head th:replace="partials/fragments :: head('Login', '/css/login.css')"></head>
+
 <body>
 <nav th:replace="partials/fragments :: nav"></nav>
-<header th:replace="partials/fragments :: header('Login')"></header>
+<header th:replace="partials/fragments :: header('Log In')"></header>
 
-<form action="/user/login" th:object="${user}" th:method="post">
-  <div class="form-group d-flex flex-column gap-2">
-    <label for="username">Username
-      <input type="text" th:field="*{username}" name="username" class="form-control" id="username"
-             placeholder="Enter Username">
-    </label>
-    <label for="password">Password
-      <input type="password" th:field="*{password}" name="password" class="form-control" id="password"
-             placeholder="Enter Password">
-    </label>
-  </div>
+<div th:if="${param.error}">
+  Invalid Username and Password.
+</div>
+<div th:if="${param.logout}">
+  You have been logged out.
+</div>
+
+<form th:action="@{/login}" method="post">
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" />
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" />
+  <input type="submit" value="Log In" />
 </form>
 
 <th:block th:replace="partials/fragments :: scripts('/js/main.js')"></th:block>

@@ -1,6 +1,4 @@
 
-
-
 let url1 = `http://localhost:8080/api/posts/likes`;
 let url2 = `http://localhost:8080/api/posts/recent`;
 let options = {
@@ -9,7 +7,6 @@ let options = {
         "Content-Type": "application/json",
     },
 };
-
 
 
 async function getTopPosts() {

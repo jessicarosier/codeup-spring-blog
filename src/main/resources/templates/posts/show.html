@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/fragments :: head('Blog Posts', '/css/show.css')">
+
 <body>
+
 <nav th:replace="partials/fragments :: nav"></nav>
 <header th:replace="partials/fragments :: header('')"></header>
 <main>
@@ -25,7 +28,7 @@
             <!--   Add Logic, if loggedIn user has already liked this post, display unlike button instead   -->
             <div class="like-buttons">
               <div>
-                <form method="post" action="/posts/like">
+                <form th:method="post" th:action="@{/posts/like}">
                   <input th:hidden="true" name="id" th:value="${post.getId()}">
                   <button class="like-button" type="submit">
                     <img src="/assets/img/thumbs-up.svg"/>
@@ -37,7 +40,7 @@
                 </p>
               </div>
               <div>
-                <form method="post" action="/posts/unlike">
+                <form th:method="post" th:action="@{/posts/unlike}">
                   <input th:hidden="true" name="id" th:value="${post.getId()}">
                   <button class="unlike-button" type="submit">
                     <img src="/assets/img/thumbs-down.svg"/>
@@ -56,7 +59,7 @@
 
             <a th:href="@{/posts}">Go Back</a>
             <div class="d-flex">
-              <form method="post" action="/posts/delete">
+              <form th:method="post" th:action="@{/posts/delete}">
                 <input th:hidden="true" name="id" th:value="${post.getId()}">
                 <button class="de-button" type="submit">Delete Post</button>
               </form>
@@ -68,12 +71,11 @@
           </ul>
         </div>
 
-
         <div class="col">
           <div class="col d-flex flex-column align-items-center">
             <div class="comments-wrapper">
               <h3>Comments</h3>
-              <form method="post" action="/comments/create">
+              <form th:method="post" th:action="@{/comments/create}">
                 <input th:hidden="true" name="postId" th:value="${post.getId()}">
                 <textarea class="text-center" name="body" placeholder="Add a comment..."></textarea>
                 <button class="comment-button" type="submit">Comment</button>
@@ -92,7 +94,6 @@
         </div>
 
       </div>
-
     </div>
   </div>
 </main>
